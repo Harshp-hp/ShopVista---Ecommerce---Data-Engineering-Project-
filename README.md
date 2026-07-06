@@ -1,4 +1,4 @@
-# ShopVista Data Platform
+# ShopVista ECommerce
 
 **End-to-End Azure Data Engineering & Analytics Solution**
 
@@ -27,7 +27,8 @@ The pipeline runs end to end from the ShopVista source system to a governed anal
 
 **ShopVista System → CSV export → Azure Data Lake Storage (ADLS Gen2) → Access Connector → Azure Databricks (Unity Catalog) → Bronze / Silver / Gold → Power BI**
 
-![Solution Blueprint](assets/solution-blueprint.png)
+<img width="8107" height="3420" alt="project_architecture" src="https://github.com/user-attachments/assets/3cddd63a-8957-4ece-9478-ec4d6d03936c" />
+
 
 ---
 
@@ -43,7 +44,8 @@ All raw data lands in a single, private ADLS Gen2 storage account (`stgsvadlsdev
 
 **Hierarchical Namespace (HNS)** is enabled, turning the account into a true file system rather than a flat blob store — this materially reduces latency on the rename/delete operations common in ETL/ELT workloads.
 
-![Storage Configuration](assets/storage-configuration.png)
+<img width="1294" height="376" alt="image" src="https://github.com/user-attachments/assets/5aadbbea-b669-41f1-a0cd-7254bd58c3aa" />
+
 
 ---
 
@@ -51,7 +53,7 @@ All raw data lands in a single, private ADLS Gen2 storage account (`stgsvadlsdev
 
 An **Access Connector** bridges ADLS and Azure Databricks, letting Databricks read raw data without credentials ever being exposed. **Unity Catalog** governs the workspace on top of that — centralized access control, auditing, and lineage across every table and transformation.
 
-![Compute & Governance](assets/compute-governance.png)
+<img width="442" height="331" alt="image" src="https://github.com/user-attachments/assets/718e80d6-7f32-427b-bf4e-27b1e87fd6f7" />
 
 ---
 
@@ -59,21 +61,25 @@ An **Access Connector** bridges ADLS and Azure Databricks, letting Databricks re
 
 Transformation logic in Databricks follows a tiered Bronze → Silver → Gold refinement process, avoiding "garbage-in, garbage-out" by validating at every stage.
 
-![Medallion Architecture](assets/medallion-architecture.png)
+<img width="921" height="349" alt="image" src="https://github.com/user-attachments/assets/c0df3572-c108-4065-b3cd-f9c5692cf4a1" />
+
+
 
 ### Bronze — Raw Landing Zone
 Immutable, unedited copy of the source data. Enables idempotent reprocessing any time downstream logic changes.
 
 `ecommerce.bronze`: `brz_brands` · `brz_category` · `brz_customers` · `brz_order_items` · `brz_order_shipments` · `brz_products`
 
-![Bronze Layer](assets/bronze-layer.png)
+<img width="427" height="395" alt="image" src="https://github.com/user-attachments/assets/b1210aac-74bd-44a2-a8ed-95cf64545f1d" />
+
 
 ### Silver — Cleansed & Conformed
 Deduplication, schema enforcement, and joins across fragmented records to produce one consistent, enterprise-level view.
 
 `ecommerce.silver`: `slv_brands` · `slv_category` · `slv_customers` · `slv_order_items` · `slv_order_shipments` · `slv_products`
 
-![Silver Layer](assets/silver-layer.png)
+<img width="318" height="316" alt="image" src="https://github.com/user-attachments/assets/f0b54581-9a30-434d-b2c6-ca66d73675db" />
+
 
 ### Gold — Business Aggregates
 Pre-calculated joins and dimensional modelling, purpose-built for sub-second Power BI queries.
@@ -81,7 +87,8 @@ Pre-calculated joins and dimensional modelling, purpose-built for sub-second Pow
 `ecommerce.gold` — **Dimensions:** `gld_dim_customers` · `gld_dim_date` · `gld_dim_products`
 **Facts:** `gld_fact_daily_orders_summary` · `gld_fact_order_items` · `gld_fact_order_shipments`
 
-![Gold Layer](assets/gold-layer.png)
+<img width="455" height="373" alt="image" src="https://github.com/user-attachments/assets/468a339b-7505-40d1-b692-4e53d333f940" />
+
 
 ---
 
@@ -89,7 +96,8 @@ Pre-calculated joins and dimensional modelling, purpose-built for sub-second Pow
 
 Gold tables feed a Power BI **star schema**: four fact tables (`fact_order_shipments`, `fact_daily_orders_summary`, `fact_order_items`, `fact_order_returns`) connected to three dimensions (`dim_date`, `dim_customers`, `dim_products`) via one-to-many relationships — minimizing redundancy and keeping cross-filtering fast at scale.
 
-![Semantic Model](assets/semantic-model.png)
+<img width="865" height="623" alt="Data model" src="https://github.com/user-attachments/assets/94165180-84e8-4876-8fe4-ddd5b53a711a" />
+
 
 ---
 
@@ -103,7 +111,8 @@ The E-Commerce Analytics dashboard, built on top of this pipeline, surfaces:
 - **Top Brands:** AcmeTech £2.16bn · ByteMax £2.02bn
 - **Top Region:** South (75K customers), ahead of West (65K) and North (49K)
 
-![Dashboard Overview](assets/dashboard-overview.png)
+<img width="1292" height="718" alt="ecommerce_analytics_report" src="https://github.com/user-attachments/assets/033bd0a0-235b-461f-b55d-5e54a39cf06a" />
+
 
 ---
 
