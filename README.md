@@ -123,18 +123,3 @@ The E-Commerce Analytics dashboard, built on top of this pipeline, surfaces:
 - **Governance:** Unity Catalog
 - **Modelling & Reporting:** Power BI (Star Schema)
 
----
-
-## Repository Structure
-
-```
-.
-├── README.md
-├── assets/                  # architecture & dashboard images
-└── docs/
-    └── ShopVista_Presentation_Script_Corrected.docx
-```
-
----
-
-*For the full narrated walkthrough of every slide, see `ShopVista_Presentation_Script_Corrected.docx`.*
