@@ -1,6 +1,6 @@
-# ShopVista ECommerce
+# ShopVista E-Commerce
 
-**End-to-End Azure Data Engineering & Analytics Solution**
+**End-to-End Data Engineering & Analytics Solution**
 
 ShopVista's operational data used to live across disconnected CSV exports and legacy systems, which meant hours of manual reporting and inconsistent numbers across teams. This project replaces that with a single, governed, Azure-native pipeline: raw retail data flows in from source, is refined through a Medallion architecture on Databricks, and lands as business-ready datasets in Power BI.
 
